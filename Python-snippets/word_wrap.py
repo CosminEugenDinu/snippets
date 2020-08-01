@@ -14,7 +14,6 @@ def word_wrap(txt, line_len):
         # count += 1
         if count == line_len:
             count = 0
-            # if txt[i] not in {'\t', ' ', '\n'}:
             if txt[i] != '\n':
                 txt_chars[prev_space(i, txt)] = '\n'
         count += 1
