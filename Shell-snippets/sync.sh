@@ -11,8 +11,3 @@ while inotifywait -r $arg1*; do
 done
 
 IFS="$OLDIFS" # restores default behaviour
-
-# sync files with Javascript dir from Acrobat
-# ./sync.sh ./JavaScripts/ "$ACROBAT_JS"
-
-# export ACROBAT_JS='/mnt/c/Program Files (x86)/Adobe/Acrobat DC/Acrobat/Javascript'
