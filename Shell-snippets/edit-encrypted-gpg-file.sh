@@ -22,11 +22,11 @@ edit it with vim, then close the editor with ':q!'."
         vim_autocmd=":autocmd VimLeave * :%! tee | gpg $gpg_flags"
         vim_autocmd+=' --passphrase '
 	# single quotes are necessary for passwords with special characters, like $
-	vim_autocmd+="'$pass'"
+	# then append backslash in from of % signs in password to escape vim autocmd special chars
+	vim_autocmd+="'${pass//\%/\\%}'"
         vim_autocmd+=" -o $CRYPT_FILE -c"
 	
 	echo ".........test............."
-	echo "$vim_autocmd"
 
         gpg $gpg_flags --passphrase "$pass" -d $CRYPT_FILE | vim $vim_flags -c "$vim_autocmd"
 
