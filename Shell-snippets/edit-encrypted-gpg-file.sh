@@ -25,10 +25,14 @@ edit it with vim, then close the editor with ':q!'."
 	# then append backslash in from of % signs in password to escape vim autocmd special chars
 	vim_autocmd+="'${pass//\%/\\%}'"
         vim_autocmd+=" -o $CRYPT_FILE -c"
-	
-	echo ".........test............."
 
-        gpg $gpg_flags --passphrase "$pass" -d $CRYPT_FILE | vim $vim_flags -c "$vim_autocmd"
+	decrypted=$(gpg $gpg_flags --passphrase "$pass" -d $CRYPT_FILE)
+	if [ $? = 0 ];then
+		printf "$decrypted" | vim $vim_flags -c "$vim_autocmd"
+	else
+		printf "Probably wrong password...\n"
+		exit 1
+	fi
 
         # restart agent in order to lose kept password
         gpgconf --kill gpg-agent
