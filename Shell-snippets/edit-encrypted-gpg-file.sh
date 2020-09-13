@@ -11,6 +11,13 @@ edit_crypt_file() {
 	fi
         echo "Enter your gpg encrypted file passphrase,
 edit it with vim, then close the editor with ':q!'."
+
+	# check for vim editor
+	if ! type vim;then
+		printf "Please install vim and try again!\n"
+		exit 1
+	fi
+
         # get password user input
         local pass
         read -sp "Password:" pass
