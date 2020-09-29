@@ -12,7 +12,6 @@ const set = (...args) => args.reduce((set, arg)=>{
 
 const test = (set) => {
   const expectedSet = new Set();
-  expectedSet.add('a');
   const values = [1, 2, 3, 3, 0];
   values.forEach(v => expectedSet.add(v));
   assert.deepStrictEqual(set(...values), expectedSet);
