@@ -8,6 +8,10 @@ function getType(obj){
     return 'null';
   if (obj === undefined)
     return 'undefined';
+  if (Object.is(obj, NaN))
+    return 'nan';
+  if (Object.is(obj, Boolean(obj)))
+    return 'boolean';
   if (typeof obj === 'object')
     // returns 'Object', 'Array', 'Map', 'Set', etc
     return obj.constructor.name;
