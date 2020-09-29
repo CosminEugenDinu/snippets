@@ -184,6 +184,7 @@ tests.set('FieldValidator', () => {
   const exactDateValues = new Set();
   const date1 = new Date(), date2 = new Date(), date3 = new Date();
   date2.setDate(date1.getDate()+1); date3.setDate(date2.getDate()+1);
+  const invalidDate = new Date('xxx');
   exactDateValues.add(date2); exactDateValues.add(date3);
   const allTypesExcept_undefined = [null,true,'str',[],{},new Map(),new Set(),new Date()];
   const allTypesExcept_null = [undefined,true,'str',[],{},new Map(),new Set(),new Date()];
@@ -202,7 +203,7 @@ tests.set('FieldValidator', () => {
     [['num',0,'number',0,2],[0,1,2],[-1,3],allTypesExcept_int],
     [['num',0,'number',0,null],[0,1,2,10000],[-1,-2],allTypesExcept_int],
     [['num',0,'number',null,null,exactIntValues],[3,4],[-1,0,2,5],allTypesExcept_int],
-    [['date',0,'Date'],[date1,date2,date3,new Date()],[],allTypesExcept_date],
+    [['date',0,'Date'],[date1,date2,date3,new Date()],[invalidDate],allTypesExcept_date],
     [['date',0,'Date',date2],[date2,date3],[date1],allTypesExcept_date],
     [['date',0,'Date',date1,date2],[date1,date2],[date3],allTypesExcept_date],
     [['date',0,'Date',null,date2],[date1,date2],[date3],allTypesExcept_date],
@@ -225,11 +226,13 @@ tests.set('FieldValidator', () => {
       assert.strictEqual(validator.validate(fieldName, testValue),true);
     });
     wrongValues.map(testValue =>{
-      assert.throws(()=>{validator.validate(fieldName, testValue)},{name:'ValueError'},
+      assert.throws(()=>{validator.validate(fieldName, testValue)},
+        {name:'ValueError'},
       `field description ${fieldDescription}, wrong test value is ${testValue}`);
     });
     wrongValueTypes.map(testValue =>{
-      assert.throws(()=>{validator.validate(fieldName, testValue)},{name:'TypeError'},
+      assert.throws(()=>{validator.validate(fieldName, testValue)},
+        {name:'TypeError'},
       `field description ${fieldDescription}, wrong test value type is ${testValue}`);
     });
   }

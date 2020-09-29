@@ -118,6 +118,16 @@ class FieldValidator{
     }
 
     // test for value
+    if(field.get('type') === 'Date'){
+      // explicit test for invalid date
+      if (Object.is(testValue.getTime(), NaN)){
+        const err = new ValueError('Invalid Date Value');
+        err.fieldName = fieldName;
+        err.expectedValue = new Date();
+        err.currentValue = testValue;
+        throw err;
+      }
+    }
     if (field.has('minValue')){
       if (testValue < field.get('minValue')){
         const err = new ValueError('Value less than minValue');
