@@ -18,7 +18,7 @@ function getType(obj){
   if (typeof obj === 'function')
     // returns 'Function'
     return obj.constructor.name;
-  // returns 'number', 'string', 'boolean'
+  // returns 'number', 'string'
   return typeof obj;
 }
 
