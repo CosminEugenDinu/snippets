@@ -123,7 +123,7 @@ class FieldValidator{
       if (Object.is(testValue.getTime(), NaN)){
         const err = new ValueError('Invalid Date Value');
         err.fieldName = fieldName;
-        err.expectedValue = new Date();
+        err.expectedValue = `something like ${new Date()}`;
         err.currentValue = testValue;
         throw err;
       }
@@ -133,7 +133,7 @@ class FieldValidator{
         const err = new ValueError('Value less than minValue');
         err.fieldName = fieldName;
         err.expectedValue = `>= ${field.get('minValue')}`;
-        err.currentValue = testValue;
+        err.currentValue = `${testValue}`;
         throw err;
       }
     }
