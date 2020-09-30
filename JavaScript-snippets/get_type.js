@@ -22,4 +22,5 @@ function getType(obj){
   return typeof obj;
 }
 
+
 module.exports = getType;

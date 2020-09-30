@@ -77,7 +77,6 @@ tests.get('argumentsValidator')();
 
 
 tests.set('FieldValidator', () => {
-
   const exactIntValues = new Set();
   const exactStrValues = new Set();
   exactIntValues.add(3); exactIntValues.add(4);
@@ -182,8 +181,8 @@ tests.set('FieldValidator', () => {
   },{name:'Error',message:'fieldIndex already exists'});
 
   const exactDateValues = new Set();
-  const date1 = new Date(), date2 = new Date(), date3 = new Date();
-  date2.setDate(date1.getDate()+1); date3.setDate(date2.getDate()+1);
+  let y = 2020, m = 9, d = 1;
+  const date1=new Date(y,m,d), date2=new Date(y,m,++d), date3=new Date(y,m,++d);
   const invalidDate = new Date('xxx');
   exactDateValues.add(date2); exactDateValues.add(date3);
   const allTypesExcept_undefined = [null,true,'str',[],{},new Map(),new Set(),new Date()];
