@@ -86,6 +86,17 @@ function arrayLookup(values, lookfor){
   return Date.now() - start;
 }
 
+function arrayLookupByIndexOf(values, lookfor){
+  const start = Date.now();
+  
+  const a = [];
+  for (const val of values)
+    a.push(val);
+  const foundIndex = a.indexOf(lookfor);
+
+  return Date.now() - start;
+}
+
 function arrayLookupByIndex(values, index){
   const start = Date.now();
   
@@ -112,9 +123,10 @@ function objectLookup(values, lookfor){
 // few values
 const few = ['number','string','object'];
 // lots of values
+const longString = String.fromCharCode(...Array(100).fill(35).map((e,i)=>e+i));
 const aLot = [];
 for (let i=0; i < 1000000; i++)
-  aLot.push('string'+i);
+  aLot.push(longString+i);
 
 const times = 100000;
 console.log(times,'first set creation done in',setCreation(few,times)); 
@@ -130,6 +142,8 @@ console.log('map    "has" lookup done in',
   mapLookup(aLot, aLot[aLot.length-1])); 
 console.log('array  "includes" lookup done in',
   arrayLookup(aLot, aLot[aLot.length-1])); 
+console.log('array  "indexOf" lookup done in',
+  arrayLookupByIndexOf(aLot, aLot[aLot.length-100])); 
 console.log('array  "[i]" lookup done in',
   arrayLookupByIndex(aLot, aLot.length-100)); 
 console.log('object "[prop]" lookup done in',
