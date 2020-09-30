@@ -14,6 +14,19 @@ function setCreation(values, times){
   return Date.now() - start;
 }
 
+function mapCreation(values, times){
+  const start = Date.now();
+
+  let count = 0;
+  while(++count < times){
+    const m = new Map();
+    for (const val of values)
+      m.set(val, val);
+  }
+
+  return Date.now() - start;
+}
+
 function arrayCreation(values, times){
   const start = Date.now();
 
@@ -47,6 +60,17 @@ function setLookup(values, lookfor){
   for (const val of values)
     s.add(val);
   const found = s.has(lookfor);
+
+  return Date.now() - start;
+}
+
+function mapLookup(values, lookfor){
+  const start = Date.now();
+  
+  const m = new Map();
+  for (const val of values)
+    m.set(val, val);
+  const found = m.has(lookfor);
 
   return Date.now() - start;
 }
@@ -86,9 +110,11 @@ console.log(times,'first set creation done in',setCreation(few,times));
 console.log();
 console.log(times,'array  creation done in',arrayCreation(few,times)); 
 console.log(times,'set    creation done in',setCreation(few,times)); 
+console.log(times,'map    creation done in',mapCreation(few,times)); 
 console.log(times,'object creation done in',objectCreation(few,times)); 
 console.log();
 console.log('set    lookup done in',setLookup(aLot, aLot[aLot.length-1])); 
+console.log('map    lookup done in',mapLookup(aLot, aLot[aLot.length-1])); 
 console.log('array  lookup done in',arrayLookup(aLot, aLot[aLot.length-1])); 
 console.log('object lookup done in',objectLookup(aLot,aLot[aLot.length-1])); 
 console.log();
