@@ -86,6 +86,17 @@ function arrayLookup(values, lookfor){
   return Date.now() - start;
 }
 
+function arrayLookupByIndex(values, index){
+  const start = Date.now();
+  
+  const a = [];
+  for (const val of values)
+    a.push(val);
+  const found = a[index];
+
+  return Date.now() - start;
+}
+
 function objectLookup(values, lookfor){
   const start = Date.now();
   
@@ -113,9 +124,15 @@ console.log(times,'set    creation done in',setCreation(few,times));
 console.log(times,'map    creation done in',mapCreation(few,times)); 
 console.log(times,'object creation done in',objectCreation(few,times)); 
 console.log();
-console.log('set    lookup done in',setLookup(aLot, aLot[aLot.length-1])); 
-console.log('map    lookup done in',mapLookup(aLot, aLot[aLot.length-1])); 
-console.log('array  lookup done in',arrayLookup(aLot, aLot[aLot.length-1])); 
-console.log('object lookup done in',objectLookup(aLot,aLot[aLot.length-1])); 
+console.log('set    "has" lookup done in',
+  setLookup(aLot, aLot[aLot.length-1])); 
+console.log('map    "has" lookup done in',
+  mapLookup(aLot, aLot[aLot.length-1])); 
+console.log('array  "includes" lookup done in',
+  arrayLookup(aLot, aLot[aLot.length-1])); 
+console.log('array  "[i]" lookup done in',
+  arrayLookupByIndex(aLot, aLot.length-100)); 
+console.log('object "[prop]" lookup done in',
+  objectLookup(aLot,aLot[aLot.length-1])); 
 console.log();
 
