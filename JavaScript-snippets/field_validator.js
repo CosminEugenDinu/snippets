@@ -112,8 +112,11 @@ class FieldValidator{
         super(msg);
         this.name = 'NotFoundError';}}
 
-    if ( ! this._fieldNames.has(fieldName))
-      throw new NotFoundError('Field not found');
+    if ( ! this._fieldNames.has(fieldName)){
+      const err = new NotFoundError('Field not found');
+      err.fieldName = fieldName;
+      throw err;
+    }
 
     const field = this._fieldNames.get(fieldName);
 
