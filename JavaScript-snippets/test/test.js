@@ -92,6 +92,7 @@ tests.set('FieldValidator', () => {
         ['nums',0,'number',null,2],
         ['nums',0,'number',0,null],
         ['nums',0,'number',0,2],
+        ['nums',0,'number',0,2,null],
         ['nums',0,'number',null,null],
         ['nums',0,'number',null,null,null],
         ['nums',0,'number',null,null,exactIntValues],
@@ -111,6 +112,7 @@ tests.set('FieldValidator', () => {
         ['nums',0,'number',null,'str',exactIntValues],
         ['nums',0,'number','str',null,exactIntValues],
         ['nums',0,'number',null,null,exactStrValues],
+        ['nums',0,'number',1,3,exactIntValues],
       ],
     },
     validate:{
@@ -134,7 +136,7 @@ tests.set('FieldValidator', () => {
   for (const args of testArguments.setField.correctArgs){
     assert.doesNotThrow(()=>{
       new FieldValidator().setField(...args); 
-    })
+    },JSON.stringify(args))
   }
   // test wrong number of arguments
   for (const args of testArguments.setField.wrongNumOfArgs){

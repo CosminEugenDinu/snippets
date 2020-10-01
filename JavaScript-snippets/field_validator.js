@@ -39,12 +39,21 @@ class FieldValidator{
       const minValueType = getType(minValue)==='null'?'null':fieldType;
       setArgTypes('string','number','string', minValueType);
     } else if (argsLength === 5){
-      const minValueType = getType(minValue)==='null'?'null':fieldType;
-      const maxValueType = getType(maxValue)==='null'?'null':fieldType;
+      const minValueType = getType(minValue)==='null' ?
+        'null':fieldType;
+      const maxValueType = getType(maxValue)==='null' ?
+        'null':fieldType;
       setArgTypes('string','number','string', minValueType, maxValueType);
     } else if (argsLength === 6){
-      const typeOfLastArg = getType(exactValues)==='null'?'null':'Set';
-      setArgTypes('string','number','string', 'null', 'null', typeOfLastArg);
+      const minValueType = getType(minValue)==='null' ?
+        'null':fieldType;
+      const maxValueType = getType(maxValue)==='null' ?
+        'null':fieldType;
+      const typeOfLastArg = getType(exactValues)==='null' ?
+        'null':'Set';
+      const exactValuesType = (minValueType==='null' && maxValueType==='null') ?
+        typeOfLastArg :'null';
+      setArgTypes('string','number','string', minValueType, maxValueType, exactValuesType);
     }
 
     //setArgTypes('string','number','string',fieldType,fieldType,'Set');
