@@ -7,9 +7,22 @@ const assert = require('assert');
  * and returns closure (used to add debugging messages).
  *
  * @param {function} procedure
+ *
  * @return {function} addMessage
+ * @prop {Map} procedure.messages
  */
 function addMessages(procedure){
+  if (typeof procedure !== 'function')
+    throw new TypeError(`${procedure.name} is not function`);
+
+  procedure.messages = new Map();
+
+  const addMessage = message =>
+    procedure.messages.has(message) ?
+      ++procedure.messages.get(message)[0] :
+      procedure.messages.set(message,[1]);
+
+  return addMessage;
 }
 
 

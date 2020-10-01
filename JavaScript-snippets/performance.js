@@ -144,6 +144,8 @@ console.log('array  "includes" lookup done in',
   arrayLookup(aLot, aLot[aLot.length-1])); 
 console.log('array  "indexOf" lookup done in',
   arrayLookupByIndexOf(aLot, aLot[aLot.length-100])); 
+console.log('array  "includes" lookup done in',
+  arrayLookup(aLot, aLot[aLot.length-1])); 
 console.log('array  "[i]" lookup done in',
   arrayLookupByIndex(aLot, aLot.length-100)); 
 console.log('object "[prop]" lookup done in',
