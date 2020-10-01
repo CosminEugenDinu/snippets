@@ -93,7 +93,8 @@ tests.set('FieldValidator', () => {
         ['nums',0,'number',0,null],
         ['nums',0,'number',0,2],
         ['nums',0,'number',null,null],
-        ['nums',0,'number',null,null,exactIntValues]
+        ['nums',0,'number',null,null,null],
+        ['nums',0,'number',null,null,exactIntValues],
       ],
       wrongNumOfArgs: [
         [],
@@ -236,6 +237,7 @@ tests.set('FieldValidator', () => {
     });
   }
 });
+
 tests.get('FieldValidator')();
 
 

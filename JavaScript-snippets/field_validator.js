@@ -42,9 +42,10 @@ class FieldValidator{
       const minValueType = getType(minValue)==='null'?'null':fieldType;
       const maxValueType = getType(maxValue)==='null'?'null':fieldType;
       setArgTypes('string','number','string', minValueType, maxValueType);
-    } else if (argsLength === 6)
-      setArgTypes('string','number','string', 'null', 'null', 'Set');
-
+    } else if (argsLength === 6){
+      const typeOfLastArg = getType(exactValues)==='null'?'null':'Set';
+      setArgTypes('string','number','string', 'null', 'null', typeOfLastArg);
+    }
 
     //setArgTypes('string','number','string',fieldType,fieldType,'Set');
     validateArgs(...arguments);
@@ -64,7 +65,7 @@ class FieldValidator{
     if (maxValue !== null && maxValue !== undefined && exactValues === undefined)
       field.set('maxValue', maxValue);
     // throw if type of exactValues is not the same as fieldType
-    if (exactValues !== undefined){
+    if (exactValues !== null && exactValues !== undefined){
       for (const exactVal of exactValues.keys()){
         if (getType(exactVal) !== fieldType){
           const err = new TypeError('Invalid field exactType');
