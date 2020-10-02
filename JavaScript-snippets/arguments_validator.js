@@ -29,14 +29,15 @@ function argumentsValidator(){
       const currArg = currArgs[i];
       if (getType(currArg) !== type){
         const err = new TypeError('Invalid Signature');
-        err.expectedType = _argTypes[i];
+        err.argIndex = i;
+        err.argType = getType(currArg); 
+        err.expectedArgType = type;
         throw err;
       }
     });
   }; 
   // returns setter and validator closure functions
   return [setArgTypes, validateArgs];
-
 } // argumentsValidator END
 
 module.exports = argumentsValidator;
