@@ -54,66 +54,77 @@ function objectCreation(values, times){
 }
 
 function setLookup(values, lookfor){
-  const start = Date.now();
-  
+  let start = Date.now(); 
   const s = new Set();
   for (const val of values)
     s.add(val);
+  console.log(values.length+' values added on set in '+(Date.now()-start));
+
+  start = Date.now();
   const found = s.has(lookfor);
 
   return Date.now() - start;
 }
 
 function mapLookup(values, lookfor){
-  const start = Date.now();
-  
+  let start = Date.now(); 
   const m = new Map();
   for (const val of values)
     m.set(val, val);
+  console.log(values.length+' values set on map in '+(Date.now()-start));
+
+  start = Date.now();
   const found = m.has(lookfor);
 
   return Date.now() - start;
 }
 
 function arrayLookup(values, lookfor){
-  const start = Date.now();
-  
+  let start = Date.now();
   const a = [];
   for (const val of values)
     a.push(val);
+  console.log(values.length+' pushed on array in '+(Date.now()-start));
+
+  start = Date.now();
   const found = a.includes(lookfor);
 
   return Date.now() - start;
 }
 
 function arrayLookupByIndexOf(values, lookfor){
-  const start = Date.now();
-  
+  let start = Date.now() 
   const a = [];
   for (const val of values)
     a.push(val);
+  console.log(values.length+' pushed on array in '+(Date.now()-start));
+
+  start = Date.now();
   const foundIndex = a.indexOf(lookfor);
 
   return Date.now() - start;
 }
 
 function arrayLookupByIndex(values, index){
-  const start = Date.now();
-  
+  let start = Date.now(); 
   const a = [];
   for (const val of values)
     a.push(val);
+  console.log(values.length+' pushed on array in '+(Date.now()-start));
+
+  start = Date.now();
   const found = a[index];
 
   return Date.now() - start;
 }
 
 function objectLookup(values, lookfor){
-  const start = Date.now();
   
   const o = {};
   for (const val of values)
     o[val] = val;
+
+  const start = Date.now();
   const found = o[lookfor];
 
   return Date.now() - start;
@@ -127,10 +138,12 @@ const longString = String.fromCharCode(...Array(100).fill(35).map((e,i)=>e+i));
 const aLot = [];
 for (let i=0; i < 1000000; i++)
   aLot.push(longString+i);
+  //aLot.push(1000+i);
 
 const times = 100000;
 console.log(times,'first set creation done in',setCreation(few,times)); 
 console.log();
+console.log(times,'array  creation done in',arrayCreation(few,times)); 
 console.log(times,'array  creation done in',arrayCreation(few,times)); 
 console.log(times,'set    creation done in',setCreation(few,times)); 
 console.log(times,'map    creation done in',mapCreation(few,times)); 
@@ -148,7 +161,8 @@ console.log('array  "includes" lookup done in',
   arrayLookup(aLot, aLot[aLot.length-1])); 
 console.log('array  "[i]" lookup done in',
   arrayLookupByIndex(aLot, aLot.length-100)); 
-console.log('object "[prop]" lookup done in',
-  objectLookup(aLot,aLot[aLot.length-1])); 
+//console.log('object "[prop]" lookup done in',
+  //objectLookup(aLot,aLot[aLot.length-1])); 
 console.log();
+
 
