@@ -70,7 +70,7 @@ tests.set('argumentsValidator', () => {
     oneInvalidType[i] = new InvalidType();
       assert.throws(()=>{
         funcDef(...oneInvalidType);
-        },{name:'TypeError', expectedType: currArgType});
+        },{name:'TypeError', expectedArgType: currArgType});
     });
 });
 tests.get('argumentsValidator')();
@@ -86,8 +86,14 @@ tests.set('FieldValidator', () => {
   const testArguments = {
     setField:{
       correctArgs: [
-        ['nums',0,'number'],
-        ['nums',0,'number',0],
+        ['nums0',0,'number'],
+        ['nums1',0,'number',undefined],
+        ['nums',0,'number',undefined,undefined],
+        ['nums',0,'number',undefined,undefined,undefined],
+        ['nums2',0,'number',undefined,2],
+        ['nums',0,'number',2,undefined],
+        ['nums',0,'number',undefined,null],
+        ['nums',0,'number',null,undefined],
         ['nums',0,'number',null],
         ['nums',0,'number',null,2],
         ['nums',0,'number',0,null],
@@ -96,6 +102,7 @@ tests.set('FieldValidator', () => {
         ['nums',0,'number',null,null],
         ['nums',0,'number',null,null,null],
         ['nums',0,'number',null,null,exactIntValues],
+        ['nums',0,'number',undefined,undefined,exactIntValues],
       ],
       wrongNumOfArgs: [
         [],
@@ -135,8 +142,12 @@ tests.set('FieldValidator', () => {
   // test correct arguments
   for (const args of testArguments.setField.correctArgs){
     assert.doesNotThrow(()=>{
-      new FieldValidator().setField(...args); 
-    },JSON.stringify(args))
+      try { new FieldValidator().setField(...args); }
+      catch (e) {
+        console.log(JSON.stringify(e));
+        throw e;
+      }
+    }, `should not throw if args are ${args}`)
   }
   // test wrong number of arguments
   for (const args of testArguments.setField.wrongNumOfArgs){
@@ -239,7 +250,6 @@ tests.set('FieldValidator', () => {
     });
   }
 });
-
 tests.get('FieldValidator')();
 
 
