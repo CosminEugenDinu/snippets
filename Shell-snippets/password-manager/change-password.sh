@@ -23,9 +23,13 @@ ch_pass() {
             read -sp "New password:" new_pass
             read -sp "New password again:" new_pass2
             [ "$new_pass" != "$new_pass2" ] && echo "Wrong new password!" && exit 1
-            new_filename="new_$1"
+            printf "\nSave as new file? (y/n):"
+            read new_file_y_n
+            new_filename="$1" # same file
+            [ "$new_file_y_n" == "y" ] && new_filename="new_$1"
             # it seems '\n' at end of file is required
             printf "$decrypted\n" | gpg $gpg_flags "$new_pass" -o $new_filename -c 
+            echo "File $new_filename saved!"
         else
             exit 1
         fi
