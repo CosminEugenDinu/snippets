@@ -21,6 +21,8 @@ ch_pass() {
         read -p "Change password ? (y/n):" confirm
         if [ "$confirm" == "y" ];then
             read -sp "New password:" new_pass
+            read -sp "New password again:" new_pass2
+            [ "$new_pass" != "$new_pass2" ] && echo "Wrong new password!" && exit 1
             new_filename="new_$1"
             # it seems '\n' at end of file is required
             printf "$decrypted\n" | gpg $gpg_flags "$new_pass" -o $new_filename -c 
