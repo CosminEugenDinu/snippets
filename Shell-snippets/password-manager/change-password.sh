@@ -7,8 +7,6 @@ ch_pass() {
             printf 'First argument must be a encrypted.gpg file!\n'
             exit 2
     fi
-    echo "Enter your gpg encrypted file passphrase,
-  edit it with vim, then close the editor with ':q!'."
 
     # get password user input
     local pass
@@ -38,8 +36,6 @@ ch_pass() {
     gpgconf --kill gpg-agent
     unset pass
 }
-
-
 
 
 ch_pass $1
