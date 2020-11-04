@@ -25,7 +25,7 @@ ch_pass() {
             read -sp "New password:" new_pass
             new_filename="new_$1"
             # it seems '\n' at end of file is required
-            printf "$decrypted\n" | gpg $gpg_flags "$new_pass" -o crypt -c 
+            printf "$decrypted\n" | gpg $gpg_flags "$new_pass" -o $new_filename -c 
         else
             exit 1
         fi
