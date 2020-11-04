@@ -35,7 +35,7 @@ edit_crypt_file() {
 
     decrypted=$(gpg $gpg_flags --passphrase "$pass" -d $CRYPT_FILE)
     if [ $? = 0 ];then
-            printf "$decrypted" | vim $vim_flags -c "$vim_autocmd"
+            printf "$decrypted\n" | vim $vim_flags -c "$vim_autocmd"
     else
             printf "Probably wrong password...\n"
             exit 1
