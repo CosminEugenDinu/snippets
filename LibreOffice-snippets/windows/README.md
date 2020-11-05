@@ -2,6 +2,7 @@
 ### LibreOffice Version: 6.4.6.2 (x64) - Windows10
 ### Python scripting:
 - add extension APSO 1.2.6.2 [from here](https://extensions.libreoffice.org/en/extensions/show/apso-alternative-script-organizer-for-python)
+- [APSO repo](https://gitlab.com/jmzambon/apso) - for additional info
 - run shipped HelloWorld.py from extension:
 ```batch
 C:\Program Files\LibreOffice\program>soffice "vnd.sun.star.script:HelloWorld.py$HelloWorldPython?language=Python&location=share"
@@ -31,3 +32,6 @@ def HelloWorldPython( ):
 
 # vim: set shiftwidth=4 softtabstop=4 expandtab:
 ````
+### Inspect output with APSO console:
+- UI: LibreOffice app -> Tools -> Macros -> Organize python scripts -> Menu -> Python shell
+
