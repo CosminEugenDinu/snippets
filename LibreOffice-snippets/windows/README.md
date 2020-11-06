@@ -1,13 +1,13 @@
 # Scripting in LibreOffice
-### LibreOffice Version: 6.4.6.2 (x64) - Windows10
-### Python scripting:
+## LibreOffice Version: 6.4.6.2 (x64) - Windows10
+### Python scripting - run as macro (should be faster than socket - see below):
 - add extension APSO 1.2.6.2 [from here](https://extensions.libreoffice.org/en/extensions/show/apso-alternative-script-organizer-for-python)
 - [APSO repo](https://gitlab.com/jmzambon/apso) - for additional info
 - run shipped HelloWorld.py from extension:
 ```batch
 C:\Program Files\LibreOffice\program>soffice "vnd.sun.star.script:HelloWorld.py$HelloWorldPython?language=Python&location=share"
 ```
-### Command explanation:
+#### Command explanation:
 - "vnd.sun.star.script:<ins>***HelloWorld.py***$***HelloWorldPython***?language=Python&location=***share***"
 - `HelloWorld.py` - "C:\Program Files\LibreOffice\\***share***\\Scripts\python\HelloWorld.py
 - `HelloWorldPython` - name of main function from HelloWorld.py file, like:
@@ -29,9 +29,10 @@ def HelloWorldPython( ):
     tRange.String = "Hello World (in Python)"
     print("hello there")
     return None
+#vim: set shiftwidth=4 softtabstop=4 expandtab
+```
 
-# vim: set shiftwidth=4 softtabstop=4 expandtab:
-````
-### Inspect output with APSO console:
+#### Inspect output with APSO console:
 - UI: LibreOffice app -> Tools -> Macros -> Organize python scripts -> Menu -> Python shell
 
+### Python scripting - using socket:
