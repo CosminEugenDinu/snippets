@@ -27,6 +27,9 @@ tRange = text.End
 #and set the string
 tRange.String = "Hello World (in Python)"
 print("Hello World (in Python)")
-print(f"File {outputfile} created.")
 newdoc.storeAsURL(destFile, ())
 newdoc.dispose()
+print(f"File {outputfile} created.")
+
+# run this file with `python3 helloworld.py`
+# then close libreoffice-socket: kill PID
