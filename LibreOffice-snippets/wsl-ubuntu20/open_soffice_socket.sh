@@ -8,9 +8,9 @@
 # soffice --accept="socket,host=localhost,port=2002;urp;" --norestore --nologo --nodefault # --headless
 # soffice --accept='socket,host=localhost,port=8100;urp;StarOffice.Service'
 
-
 soffice_bin=/usr/lib/libreoffice/program/soffice.bin
 
-$soffice_bin --headless --nologo --nofirststartwizard --norestore --nodefault --accept='socket,host=localhost,port=8100;urp;StarOffice.Service'
+# $soffice_bin --headless --invisible --nocrashreport --nodefault --nofirststartwizard --nologo --norestore --accept='$connection'
+$soffice_bin --headless --nologo --nofirststartwizard --norestore --nodefault --accept='socket,host=localhost,port=2002;urp;StarOffice.Service'
 
 
