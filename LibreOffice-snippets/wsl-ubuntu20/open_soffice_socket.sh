@@ -11,6 +11,6 @@
 
 soffice_bin=/usr/lib/libreoffice/program/soffice.bin
 
-$soffice_bin --headless --nologo --nofirststartwizard --norestore --nodefault --accept='socket,host=localhost,port=8100;urp;StarOffice.Service'
+$soffice_bin --headless --nologo --nofirststartwizard --norestore --nodefault --accept='socket,host=localhost,port=2002;urp;StarOffice.Service'
 
 
