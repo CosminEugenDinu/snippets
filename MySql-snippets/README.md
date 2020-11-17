@@ -25,3 +25,23 @@ Import backup database data
 ```bash
 sudo mysql db_name < /full/path/to/backup.sql
 ```
+Now start mysql service (WSL2 - Ubuntu18):
+```bash
+sudo service mysql start
+```
+If encountered an error like this: *Starting MySQL.2020-11-13T12:32:57.347234Z mysqld_safe Directory '/var/run/mysqld' for UNIX socket file don't exists.
+ The server quit without updating PID file (/var/run/mysqld/mysqld.pid).*
+Fix it like this:
+```bash
+(
+# got error after reinstalling: mysqld_safe Directory '/var/run/mysqld' for UNIX socket file don't exists
+# so check if exists and if not make it
+if [ ! -d "/var/run/mysqld" ]; then
+  sudo mkdir -p /var/run/mysqld
+  sudo chown mysql:mysql /var/run/mysqld
+ fi
+
+# start mysql server
+sudo service mysql start
+)
+```
