@@ -2,6 +2,19 @@ import sys
 
 
 def Messages(label=''):
+    """
+    Call inside a function like:
+    add_msg, get_msgs = Messages('warning')
+
+    Add debug messages like this:
+    add_msg('first mess')
+    add_msg('sec meg')
+    add_msg('first_mess')
+
+    Retieve messages like this:
+    messages = get_msgs()
+    print(messages)
+    """
 
     _who_called_me = sys._getframe(1).f_code.co_name
     _msgs_count = {}
