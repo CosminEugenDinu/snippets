@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+current_dir=$(pwd)
+last_link=$1;
+last_no=$(printf "$last_link" | sed "s/.*\/\([0-9]\{1,3\}\).ts$/\1/" - )
+
+# create list of links by replacing last no
+# like https://blabla/file/name/$last_no.ts
+for (( i=0; i<=$last_no; i++ ));do
+  printf "$last_link" | sed "s/\(.*\/\)\([0-9]\{1,3\}\)\(.ts$\)/\1$i\3\n/" - >> links;
+done
+
+(
+cd "$current_dir"
+cat links | xargs -I '{}' -P 10 youtube-dl '{}'
+
+for i in `ls *.ts | sort -V`;do
+echo "file $i";
+done >> filelist.txt
+ffmpeg -f concat -i filelist.txt -c copy -bsf:a aac_adtstoasc video.mp4
+
+rm *.ts
+)
+
+
+
+
