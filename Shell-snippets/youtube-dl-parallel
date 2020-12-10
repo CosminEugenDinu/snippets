@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cat linklist | xargs -I '{}' -P 10 youtube-dl '{}'
