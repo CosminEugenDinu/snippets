@@ -12,7 +12,8 @@ done
 
 (
 cd "$current_dir"
-cat links | xargs -I '{}' -P 10 youtube-dl '{}'
+#cat links | xargs -I '{}' -P 10 youtube-dl '{}'
+cat links | xargs -I '{}' -P 20 wget -nvc '{}'
 
 for i in `ls *.ts | sort -V`;do
 echo "file $i";
