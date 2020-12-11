@@ -14,6 +14,7 @@ last_no=$(
 
 (
 cd "$current_dir"
+mkdir tmp && cd tmp
 # create list of links by replacing last no
 # like https://blabla/file/name/$last_no.ts
 for (( i=0; i<=$last_no; i++ ));do
@@ -28,13 +29,10 @@ cat links |
 for i in `ls *.ts | sort -V`;do
 echo "file $i";
 done >> filelist
+
 ffmpeg -f concat -i filelist -c copy -bsf:a aac_adtstoasc "$video_name.mp4"
 
-rm *.ts
-rm filelist
-rm links
+mv "$video_name.mp4" ../
 )
 
-
-
-
+rm -r tmp
