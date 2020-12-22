@@ -35,4 +35,5 @@ ffmpeg -f concat -i filelist -c copy -bsf:a aac_adtstoasc "$video_name.mp4"
 mv "$video_name.mp4" ../
 )
 
-rm -r tmp
+#rm -r tmp
+mv tmp "$video_name.tmp"
