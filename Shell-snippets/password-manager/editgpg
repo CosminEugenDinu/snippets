@@ -20,7 +20,7 @@ edit_crypt_file() {
 
     # get password user input
     local pass
-    r#ead -sp "Password:" pass
+    read -sp "Password:" pass
 
     gpg_flags='--batch --yes'
     vim_flags='- -n -u NONE --not-a-term'
