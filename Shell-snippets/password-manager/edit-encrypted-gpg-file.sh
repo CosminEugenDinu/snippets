@@ -20,7 +20,7 @@ edit_crypt_file() {
 
     # get password user input
     local pass
-    read -sp "Password:" pass
+    r#ead -sp "Password:" pass
 
     gpg_flags='--batch --yes'
     vim_flags='- -n -u NONE --not-a-term'
@@ -35,7 +35,7 @@ edit_crypt_file() {
 
     decrypted=$(gpg $gpg_flags --passphrase "$pass" -d $CRYPT_FILE)
     if [ $? = 0 ];then
-            printf "$decrypted\n" | vim $vim_flags -c "$vim_autocmd"
+            printf '%s\n' "$decrypted" | vim $vim_flags -c "$vim_autocmd"
     else
             printf "Probably wrong password...\n"
             exit 1
