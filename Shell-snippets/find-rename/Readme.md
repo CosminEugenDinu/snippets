@@ -3,15 +3,9 @@
 ```bash
 
 # find names with spaces, except those begining with '_'
-# and store them in a variable
-# !ATENTION! find returns a list separated by '\n'
-found=$( find * -type f -regex '.*/[^_][^/]*\.html' )
+# and store them in a an array
 
-# convert variable to array (but first set IFS=$'\n')
-old_IFS=$IFS
-IFS=$'\n'
-list=( $found )
-IFS=$old_IFS
+mapfile -d $'\0' list < <(find . -type f -regex '.*/_.*\.html' -print0)
 
 # check 
 for name in "${list[@]}";do
