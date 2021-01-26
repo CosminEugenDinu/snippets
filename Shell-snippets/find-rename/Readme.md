@@ -4,7 +4,7 @@
 
 # find names with spaces, except those begining with '_'
 # and store them in a variable
-# !ATENTION! find does not return an array but a single variable
+# !ATENTION! find returns a list separated by '\n'
 found=$( find * -type f -regex '.*/[^_][^/]*\.html' )
 
 # convert variable to array (but first set IFS=$'\n')
