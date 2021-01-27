@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+
+# filename.ext -> filename.red.mp4
+output_file="$(echo $1 | sed -r "s/(.*)\..+/\1\.red.mp4/" -)"
+
+compress() {
+  ffmpeg -i "$1" -vcodec 'libx265' -crf '28' "${output_file}" 
+}
+
+compress "$1"
