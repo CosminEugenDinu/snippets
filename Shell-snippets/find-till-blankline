@@ -1,0 +1,9 @@
+
+# using sed to search for pattern and print untill next empty line
+
+cat file | sed -n '/pattern/I,/^$/p'
+
+
+# sed print without last empty line
+
+cat file | sed -n '/pattern/I,/^$/{/^$/!p}
