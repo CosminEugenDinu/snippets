@@ -13,7 +13,7 @@ declare -i last_no=$(
 
 (
 cd "${current_dir}"
-mkdir tmp && cd tmp
+mkdir "${video_name}.tmp" && cd $_
 # create list of links by replacing last no
 # like https://blabla/file/name/$last_no.ts
 for (( i=0; i<="${last_no}"; i++ ));do
@@ -34,5 +34,3 @@ ffmpeg -f concat -i filelist -c copy -bsf:a aac_adtstoasc "${video_name}.mp4"
 mv "${video_name}.mp4" ../
 )
 
-#rm -r tmp
-mv tmp "${video_name}.tmp"
