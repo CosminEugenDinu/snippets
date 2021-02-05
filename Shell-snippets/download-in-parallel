@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
 
-current_dir="$(pwd)"
 last_link="$1";
 video_name="$(
   printf "${last_link}" |
     sed -r "s/.*\/\/([^\/]*\/){3}([^\/]*)\/.*/\2/" - 
   )"
-declare -i last_no=$(
+declare -i last_no="$(
   printf "${last_link}" | 
     sed "s/.*\/\([0-9]\{1,4\}\).ts$/\1/" - 
-  )
+  )"
 
-(
-cd "${current_dir}"
 mkdir "${video_name}.tmp" && cd $_
 # create list of links by replacing last no
 # like https://blabla/file/name/$last_no.ts
@@ -25,12 +22,11 @@ cat links |
     # run in paralled 20 instances of wget
     xargs -I '{}' -P 20 wget -nvc '{}'
 
-for i in `ls *.ts | sort -V`;do
-echo "file $i";
-done >> filelist
+# construct list of sorted files suitable for ffmpeg concat
+# one row of filelist is like: file vid1.ts
+echo "$(ls *.ts -1v)" | sed -r "s/^/file /" - > filelist
 
 ffmpeg -f concat -i filelist -c copy -bsf:a aac_adtstoasc "${video_name}.mp4"
 
 mv "${video_name}.mp4" ../
-)
 
