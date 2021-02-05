@@ -1,24 +1,23 @@
 #!/usr/bin/env bash
 
-current_dir=$(pwd)
-last_link=$1;
-video_name=$(
-  printf "$last_link" |
+current_dir="$(pwd)"
+last_link="$1";
+video_name="$(
+  printf "${last_link}" |
     sed -r "s/.*\/\/([^\/]*\/){3}([^\/]*)\/.*/\2/" - 
-  )
-last_no=$(
-  printf "$last_link" | 
+  )"
+declare -i last_no=$(
+  printf "${last_link}" | 
     sed "s/.*\/\([0-9]\{1,4\}\).ts$/\1/" - 
   )
 
-
 (
-cd "$current_dir"
+cd "${current_dir}"
 mkdir tmp && cd tmp
 # create list of links by replacing last no
 # like https://blabla/file/name/$last_no.ts
-for (( i=0; i<=$last_no; i++ ));do
-  printf "$last_link" |
+for (( i=0; i<="${last_no}"; i++ ));do
+  printf "${last_link}" |
     sed "s/\(.*\/\)\([0-9]\{1,4\}\)\(.ts$\)/\1$i\3\n/" - >> links 
 done
 
@@ -30,10 +29,10 @@ for i in `ls *.ts | sort -V`;do
 echo "file $i";
 done >> filelist
 
-ffmpeg -f concat -i filelist -c copy -bsf:a aac_adtstoasc "$video_name.mp4"
+ffmpeg -f concat -i filelist -c copy -bsf:a aac_adtstoasc "${video_name}.mp4"
 
-mv "$video_name.mp4" ../
+mv "${video_name}.mp4" ../
 )
 
 #rm -r tmp
-mv tmp "$video_name.tmp"
+mv tmp "${video_name}.tmp"
