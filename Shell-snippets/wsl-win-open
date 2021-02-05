@@ -1,0 +1,37 @@
+
+
+w_pdf() {
+  w_pdf_path='C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe'
+  lin_pdf="$(wslpath "${w_pdf_path}")"
+  w_file_path="$(wslpath -w "$1")"
+  ("${lin_pdf}" "${w_file_path}" & )
+}
+
+w_sumatrapdf() {
+  w_sumatrapdf_path='C:\Program Files\SumatraPDF\SumatraPDF.exe'
+  wsl_path="$(wslpath "${w_sumatrapdf_path}")"
+  w_file_path="$(wslpath -w "$1")"
+  ("${wsl_path}" "${w_file_path}" &)
+}
+
+w_vlc() {
+  w_vlc_path='C:\Program Files (x86)\VideoLAN\VLC\vlc.exe'
+  lin_vlc="$(wslpath "$w_vlc_path")"
+  ("${lin_vlc}" "$1" & ) > /dev/null 2>&1 
+}
+
+w_edge() {
+  w_edge_path='C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+  lin_edge="$(wslpath "${w_edge_path}")"
+  w_file="$(wslpath -w "$1")"
+  "${lin_edge}" "${w_file}"
+}
+
+open() {
+  # get extension from filename
+  ext=$(echo "$1" | sed -r "s/^.+\.//" -)
+  [[ "${ext}" == "mhtml" ]] && w_edge "$1"
+  [[ "${ext}" == "html" ]] && w_edge "$1"
+  [[ "${ext}" == "mp4" ]] && w_vlc "$1"
+  [[ "${ext}" == "pdf" ]] && w_pdf "$1"
+}
