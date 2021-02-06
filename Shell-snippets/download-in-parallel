@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
+if [[ -z "$1" ]]; then
+  echo "No link provided" >&2
+  exit 1
+fi
+
 last_link="$1";
+
 video_name="$(
   printf "${last_link}" |
     sed -r "s/.*\/\/([^\/]*\/){3}([^\/]*)\/.*/\2/" - 
@@ -11,6 +17,7 @@ declare -i last_no="$(
   )"
 
 mkdir "${video_name}.tmp" && cd $_
+
 # create list of links by replacing last no
 # like https://blabla/file/name/$last_no.ts
 for (( i=0; i<="${last_no}"; i++ ));do
