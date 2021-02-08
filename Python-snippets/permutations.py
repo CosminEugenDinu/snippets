@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 
+def permute(bag, perm):
+    if len(perm) == len(bag):
+        print(perm)
+        return
+    for el in bag:
+        if el not in perm:
+            perm.append(el)
+            permute(bag, perm)
+            perm.pop()
+
+permute('abcd',[])
+
 def generate_permutations(perm, n, counter):
     counter[0] += 1
     print(f"f{counter[0]} called with {perm}")
