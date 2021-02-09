@@ -1,0 +1,49 @@
+
+#!/usr/bin/env bash
+
+#################################################################################
+#
+# If a directory contain only a file like video.mp4 (and not video.red.mp4)
+# then find that file and return it's path (name)
+#
+# Takes a paths to directories as argument as returned by find and returns
+# a list of paths that contains only video.mp4 (that dir does not contain
+# video.red.mp4)
+#
+#################################################################################
+
+
+# reads from stdin and store in array
+mapfile -t dirlist < <( cat )
+
+# list of video.mp4 files without corresponding video.red.mp4 file in same directory
+solo_video_list=""
+
+for dir in "${dirlist[@]}";do
+
+  # if not directory, exit with code 1
+  [[ ! -d "${dir}" ]] && echo "${dir} is not a directory." >&2 && exit 1
+
+  for videofile in "${dir}"/*;do
+
+    basename="${videofile%.*}"
+    # trim .red suffix if exists
+    basename="${basename%.red}"
+
+    ext="${videofile##*.}"
+    if [[ "${ext}" != "mp4" ]]; then
+      continue
+    fi
+
+    # check if corresponding basename.red.mp4 does not exists
+    if [[ ! -f "${basename}.red.mp4" ]]; then
+      solo_video_list+="${videofile}"$'\n'
+    fi
+
+  done
+
+done
+
+printf "%s" "${solo_video_list}"
+
+
