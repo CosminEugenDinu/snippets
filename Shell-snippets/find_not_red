@@ -5,15 +5,13 @@
 # If a directory contain only a file like video.mp4 (and not video.red.mp4)
 # then find that file and return it's path (name)
 #
-# Takes a paths to directories as argument as returned by find and returns
+# Takes a paths to directory as argument and returns
 # a list of paths that contains only video.mp4 (that dir does not contain
 # video.red.mp4)
 #
 #################################################################################
 
-
-# reads from stdin and store in array
-mapfile -t dirlist < <( cat )
+mapfile -d $'\0' -t dirlist < <( find "$1" -type d -print0 )
 
 # list of video.mp4 files without corresponding video.red.mp4 file in same directory
 solo_video_list=""
