@@ -34,3 +34,9 @@ ssh -p 48002 target_user@localhost
 ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 48002 target_user@localhost
 ```
 - On `target` server, don't forget to set `PasswordAuthentication no` and `sudo service ssh restart`.
+
+## Use rsync over ssh tunnel
+```bash
+# remove -n (--dry-run) for file transfer
+rsync -avP -n -e "ssh -p 48002" target_user@localhost:remotedir/ ./localdir/
+```
