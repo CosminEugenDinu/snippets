@@ -16,7 +16,7 @@ declare -i last_no="$(
     sed "s/.*\/\([0-9]\{1,4\}\).ts$/\1/" - 
   )"
 
-mkdir "${video_name}.tmp" && cd $_
+mkdir ".${video_name}.tmp" && cd $_
 
 # create list of links by replacing last no
 # like https://blabla/file/name/$last_no.ts
