@@ -2,5 +2,5 @@
 ```bash
 gpg -d secrets.gpg 2>/dev/null \
   | awk '{RS = '\n'; IGNORECASE=1} /pattern/ {print(""); print($0)}' \
-  | grep -i "pass"
+  | grep -i -E ".*pass.*|$"
 ```
