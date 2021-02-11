@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
+time cat | parallel ffmpeg -i '{}' -hide_banner \
+  -vcodec 'libx265' \
+  -crf 28 \
+  -b:a '192k' \
+  '{.}.red.mp4' 1>/dev/null 2>&1
 
-# filename.ext -> filename.red.mp4
-output_file="$(echo $1 | sed -r "s/(.*)\..+/\1\.red.mp4/" -)"
-
-compress() {
-  ffmpeg -i "$1" -vcodec 'libx265' -crf '28' "${output_file}" 
-}
-
-compress "$1"
