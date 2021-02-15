@@ -1,10 +1,10 @@
+#!/bin/bash
 
-
-w_pdf() {
-  w_pdf_path='C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe'
-  lin_pdf="$(wslpath "${w_pdf_path}")"
+w_acrobat() {
+  w_acrobat_path='C:\Program Files (x86)\Adobe\Acrobat DC\Acrobat\Acrobat.exe'
+  lin_acrobat_path="$(wslpath "${w_acrobat_path}")"
   w_file_path="$(wslpath -w "$1")"
-  ("${lin_pdf}" "${w_file_path}" & )
+  ("${lin_acrobat_path}" "${w_file_path}" & )
 }
 
 w_sumatrapdf() {
@@ -15,7 +15,7 @@ w_sumatrapdf() {
 }
 
 w_vlc() {
-  w_vlc_path='C:\Program Files (x86)\VideoLAN\VLC\vlc.exe'
+  w_vlc_path='C:\Program Files\VideoLAN\VLC\vlc.exe'
   lin_vlc="$(wslpath "$w_vlc_path")"
   ("${lin_vlc}" "$1" & ) > /dev/null 2>&1 
 }
@@ -27,11 +27,13 @@ w_edge() {
   "${lin_edge}" "${w_file}"
 }
 
-open() {
-  # get extension from filename
-  ext=$(echo "$1" | sed -r "s/^.+\.//" -)
-  [[ "${ext}" == "mhtml" ]] && w_edge "$1"
-  [[ "${ext}" == "html" ]] && w_edge "$1"
-  [[ "${ext}" == "mp4" ]] && w_vlc "$1"
-  [[ "${ext}" == "pdf" ]] && w_pdf "$1"
-}
+#####################################################
+# if no arguments, read from stdin, otherwise arg1
+(( $# == 0 )) && filepath="$(cat)" || filepath="$1"
+
+# get extension from filename
+ext="$(echo "${filepath}" | sed -r "s/^.+\.//" -)"
+[[ "${ext}" == "mhtml" ]] && w_edge "${filepath}"
+[[ "${ext}" == "html" ]] && w_edge "${filepath}"
+[[ "${ext}" == "mp4" ]] && w_vlc "${filepath}"
+[[ "${ext}" == "pdf" ]] && w_sumatrapdf "${filepath}"
