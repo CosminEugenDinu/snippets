@@ -9,6 +9,10 @@ sudo apt install texlive-latex-base
 sudo apt install texlive-fonts-recommended
 sudo apt install texlive-fonts-extra
 ```
+### For use custom fonts:
+```bash
+sudo apt install texlive-fonts-extra
+```
 ### Extra packages
 ```bash
 sudo apt install texlive-latex-extra
