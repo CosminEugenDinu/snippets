@@ -34,7 +34,8 @@ echo "
   "code-runner.executorMapByFileExtension": {
     ".tex": "pdflatex -interaction=nonstopmode $fileName"
     },  
-    "code-runner.runInTerminal": true
+    "code-runner.runInTerminal": true,
+    "latex-workshop.latex.autoBuild.run": "never",
 }
 " > .vscode/settings.json
 ```
@@ -42,3 +43,5 @@ echo "
 
 ## Watch pdf on Windows side with SumatraPDF
 https://www.sumatrapdfreader.org/free-pdf-reader.html
+
+### [Install and use custom fonts](docs/custom-fonts.md)
