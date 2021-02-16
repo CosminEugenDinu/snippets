@@ -13,7 +13,7 @@ Verify the installation:
 ```bash
 fc-list | grep -i 'fontname'
 ```
-## Inxtall [xelatex](https://en.wikipedia.org/wiki/XeTeX) typesetting engine (or `lualatex`)
+## Install [xelatex](https://en.wikipedia.org/wiki/XeTeX) typesetting engine (or `lualatex`)
 ```bash
 sudo apt update && sudo apt install texlive-xetex
 ``` 
