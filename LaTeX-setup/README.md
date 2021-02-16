@@ -45,3 +45,4 @@ echo "
 https://www.sumatrapdfreader.org/free-pdf-reader.html
 
 ### [Install and use custom fonts](docs/custom-fonts.md)
+### [Additional documentation](docs/additional-documentation.md)
