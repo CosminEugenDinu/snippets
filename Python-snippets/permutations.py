@@ -54,3 +54,31 @@ def permute(bag, permutation):
             bag.insert(k, permutation.pop())
 
 permute(list('catdog'), [])
+
+
+# **********************************************
+def permutations(string):
+    bag = list(string)
+    perm = []
+    all_perms = set()
+    permute(bag, perm, all_perms)
+    return sorted(all_perms)
+
+def permute(bag, perm, all_perms):
+    if len(bag) == len(perm):
+        elems = [bag[i] for i in perm]
+        all_perms.add(''.join(elems))
+        return
+    for i, elem in enumerate(bag):
+        if i not in perm:
+            perm.append(i)
+            permute(bag, perm, all_perms)
+            perm.pop()
+
+
+
+permutations('a'); # ['a']
+permutations('ab'); # ['ab', 'ba']
+permutations('aabb'); # ['aabb', 'abab', 'abba', 'baab', 'baba', 'bbaa']
+
+# **********************************************
