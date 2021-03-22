@@ -11,6 +11,12 @@ video_name="$(
   printf "${last_link}" |
     sed -r "s/.*\/\/([^\/]*\/){3}([^\/]*)\/.*/\2/" - 
   )"
+
+#video_version="$(
+#  printf "${last_link}" |
+#    sed -r "s/.*\/\/([^\/]*\/){4}([^\/]*)\/.*/\2/" -
+#  )"
+
 declare -i last_no="$(
   printf "${last_link}" | 
     sed "s/.*\/\([0-9]\{1,4\}\).ts$/\1/" - 
