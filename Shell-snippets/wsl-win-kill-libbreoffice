@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+cmd.exe /c taskkill /F /IM soffice.bin
