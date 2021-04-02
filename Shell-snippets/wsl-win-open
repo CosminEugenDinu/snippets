@@ -15,7 +15,7 @@ w_sumatrapdf() {
 }
 w_sumatrapdf() {
   w_file_path="$(wslpath -w "$1")"
-  (cmd.exe /c start "" "SumatraPDF.exe" "${w_file_path}" &)
+  (cmd.exe /c start "" "SumatraPDF.exe" "${w_file_path}" &) > /dev/null 2>&1
 }
 
 w_libreoffice() {
