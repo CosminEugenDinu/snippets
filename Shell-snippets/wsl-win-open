@@ -13,6 +13,10 @@ w_sumatrapdf() {
   w_file_path="$(wslpath -w "$1")"
   ("${wsl_path}" "${w_file_path}" &)
 }
+w_sumatrapdf() {
+  w_file_path="$(wslpath -w "$1")"
+  (cmd.exe /c start "" "SumatraPDF.exe" "${w_file_path}" &)
+}
 
 w_libreoffice() {
   w_libreoffice_path='C:\Program Files\LibreOffice\program\soffice.exe'
