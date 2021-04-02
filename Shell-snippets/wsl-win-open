@@ -14,6 +14,13 @@ w_sumatrapdf() {
   ("${wsl_path}" "${w_file_path}" &)
 }
 
+w_libreoffice() {
+  w_libreoffice_path='C:\Program Files\LibreOffice\program\soffice.exe'
+  wsl_path="$(wslpath "${w_libreoffice_path}")"
+  w_file_path="$(wslpath -w "$1")"
+  ("${wsl_path}" "${w_file_path}" &)
+}
+
 w_vlc() {
   w_vlc_path='C:\Program Files\VideoLAN\VLC\vlc.exe'
   lin_vlc="$(wslpath "$w_vlc_path")"
@@ -37,3 +44,4 @@ ext="$(echo "${filepath}" | sed -r "s/^.+\.//" -)"
 [[ "${ext}" == "html" ]] && w_edge "${filepath}"
 [[ "${ext}" == "mp4" ]] && w_vlc "${filepath}"
 [[ "${ext}" == "pdf" ]] && w_sumatrapdf "${filepath}"
+[[ "${ext}" == "ods" ]] && w_libreoffice "${filepath}"
