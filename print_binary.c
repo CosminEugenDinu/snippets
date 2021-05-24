@@ -6,7 +6,7 @@ Print a string binary representation of a number.
 
 void bin(char bitStr[], short num, char bits)
 {
-    for (short i = bits - 1; i > 0; i--)
+    for (short i = bits - 1; i >= 0; i--)
     {
         if (num & 1)
         {
