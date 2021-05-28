@@ -54,28 +54,28 @@ union bit10
 int main()
 {
     // Do not uncomment next line, unless you can stop program execution !
-    testAllValues();
+    // testAllValues();
 
-    // int i = nLen;
-    // short numbers_10bit[nLen] = {10, 4, 1, 13};
-    // while (i--)
-    // {
-    //     n10b[i] = numbers_10bit[i];
-    // }
+    int i = nLen;
+    short numbers_10bit[nLen] = {10, 4, 1, 13};
+    while (i--)
+    {
+        n10b[i] = numbers_10bit[i];
+    }
 
-    // printArr(n10b, nLen);
+    printArr(n10b, nLen);
 
-    // pack_4n5c(n10b, c8b);
+    pack_4n5c(n10b, c8b);
 
-    // printBinArrShort(n10b, nLen, 10, ' ');
-    // printBinArrChar(c8b, cLen, 8, ' ');
-    // printBinArrShort(n10b, nLen, 10, 0);
-    // printBinArrChar(c8b, cLen, 8, 0);
+    printBinArrShort(n10b, nLen, 10, ' ');
+    printBinArrChar(c8b, cLen, 8, ' ');
+    printBinArrShort(n10b, nLen, 10, 0);
+    printBinArrChar(c8b, cLen, 8, 0);
 
-    // unpack_5c4n(c8b, unpacked_n10b);
+    unpack_5c4n(c8b, unpacked_n10b);
 
-    // printArr(unpacked_n10b, nLen);
-    // printBinArrShort(unpacked_n10b, nLen, 10, ' ');
+    printArr(unpacked_n10b, nLen);
+    printBinArrShort(unpacked_n10b, nLen, 10, ' ');
 
     return 0;
 }
