@@ -24,18 +24,19 @@ void printArr(short *arr, int len);
 void printBinArrChar(char *arr, int arrLen, int bits, char sep);
 void printBinArrShort(short *arr, int arrLen, int bits, char sep);
 void test_4n5c4n(short *expected, short *got, char *charStream);
-void testAllValues(short from, short to); // !!!!! this function tries all values !!!!
+void testAllValues(short firstNum);
 
 int main(int argc, char *argv[])
 {
-    // Do not uncomment next line, unless you can stop program execution !
-    // testAllValues();
+    /*
+    To test, run following bash command (assuming 4 processes in parallel)
+printf "%s\\n" {0..3} | xargs -n 1 -P 4 -I % snippets/C-snippets/four10bit_in_five8bit %  
+    */
     if (argc > 1) {
-        int from, to;
-        sscanf(argv[1], "%d", &from);  
-        sscanf(argv[2], "%d", &to);  
-        printf("testing from %d to %d\n",from,to);
-        testAllValues(from, to);
+        int firstNum;
+        sscanf(argv[1], "%d", &firstNum);  
+        printf("testing firstNum:%d\n",firstNum);
+        testAllValues((short)firstNum);
     }
 
 
@@ -163,11 +164,11 @@ void test_4n5c4n(short *expected, short *got, char *charStream)
     }
 }
 
-void testAllValues(short from, short to)
+void testAllValues(short firstNum)
 {
     const int max10b = 1023;
     short test10b[nLen] = {0, 0, 0, 0};
-    for (int i = from; i <= to; i++)
+    for (int i = firstNum; i <= firstNum; i++)
     {
         printf("%d\n", i);
         for (int j = 0; j <= max10b; j++)
