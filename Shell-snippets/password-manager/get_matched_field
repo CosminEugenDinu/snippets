@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# pattern to look for in gpg file fields
+pattern="$1"
+# path of gpg encrypted file
+gpg_file="$2"
+
+get_matched_field () {
+  pattern="$1"
+  gpg_file="$2"
+  ret=$(
+  gpg -d "${gpg_file}" 2>/dev/null \
+    | awk '{RS = '\n'; IGNORECASE=1} /'"${pattern}"'/ {print(""); print($0)}'
+  )
+  printf "%s\n\n" "${ret}"
+}
+
+# pretty print lines with pin and pass 
+get_matched_field "${pattern}" "${gpg_file}"
+
+
+
+
