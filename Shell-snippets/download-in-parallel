@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
-if [[ -z "$1" ]]; then
-  echo "No link provided" >&2
-  exit 1
-fi
-
-last_link="$1";
+#####################################################
+# if no arguments, read from stdin, otherwise arg1
+(( $# == 0 )) && last_link="$(cat)" || last_link="$1"
 
 video_name="$(
   printf "${last_link}" |
@@ -17,12 +14,13 @@ video_name="$(
 #    sed -r "s/.*\/\/([^\/]*\/){4}([^\/]*)\/.*/\2/" -
 #  )"
 
-declare -i last_no="$(
+declare -i last_no
+last_no="$(
   printf "${last_link}" | 
     sed "s/.*\/\([0-9]\{1,4\}\).ts$/\1/" - 
   )"
 
-mkdir ".${video_name}.tmp" && cd $_
+mkdir -p ".${video_name}.tmp" && cd $_ || exit
 
 # create list of links by replacing last no
 # like https://blabla/file/name/$last_no.ts
