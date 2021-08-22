@@ -41,7 +41,8 @@ printf "%s\\n" {0..3} | xargs -n 1 -P 4 -I % snippets/C-snippets/four10bit_in_fi
 
 
     int i = nLen;
-    short numbers_10bit[nLen] = {10, 4, 1, 13};
+    // short numbers_10bit[nLen] = {10, 4, 1, 13};
+    short numbers_10bit[nLen] = {4, 1, 0, 0};
     while (i--)
     {
         n10b[i] = numbers_10bit[i];
@@ -131,7 +132,7 @@ void unpack_5c4n(char c8b[5], short n10b[4])
 void pack_4n5c(short n10b[4], char c8b[5])
 {
     c8b[0] = n10b[0] >> 2;
-    c8b[1] = (n10b[0] << 6) | (n10b[1] >> 4);
+    c8b[1] = (n10b[0] << 6) & 0x3f | (n10b[1] >> 4);
     c8b[2] = (n10b[1] << 4) | (n10b[2] >> 6);
     c8b[3] = (n10b[2] << 2) | (n10b[3] >> 8);
     c8b[4] = n10b[3];
