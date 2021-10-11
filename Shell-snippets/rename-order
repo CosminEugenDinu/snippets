@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+names=$(ls -1v)
+
+i=1
+for n in $names;do
+  ren=$(echo $n | sed -r "s/\.[0-9]{1,2}\.([0-9]\.)?/\.${i}\./" -)
+  i=$((i+1))
+  echo $n
+  echo $ren
+  mv $n $ren
+done
+
