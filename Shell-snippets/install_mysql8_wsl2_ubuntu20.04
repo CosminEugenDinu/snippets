@@ -1,0 +1,36 @@
+wget https://repo.mysql.com//mysql-apt-config_0.8.18-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.18-1_all.deb
+sudo apt update
+sudo apt upgrade
+sudo apt-cache policy mysql-server
+sudo apt install mysql-client mysql-community-server mysql-server
+sudo apt update
+sudo apt upgrade
+sudo mysql_secure_installation
+
+echo "
+Enter current password for root (enter for none): <Enter password>
+VALIDATE PASSWORD PLUGIN can be used to test passwords 
+and improve security. It checks the strength of password 
+and allows the users to set only those passwords which are 
+secure enough. Would you like to setup VALIDATE PASSWORD plugin? 
+
+Press y|Y for Yes, any other key for No: Y 
+
+There are three levels of password validation policy: 
+
+LOW    Length >= 8 
+MEDIUM Length >= 8, numeric, mixed case, and special characters 
+STRONG Length >= 8, numeric, mixed case, special characters and dictionary file 
+
+Please enter 0 = LOW, 1 = MEDIUM and 2 = STRONG: 1 
+Using existing password for root. 
+
+Estimated strength of the password: 25  
+Change the password for root ? ((Press y|Y for Yes, any other key for No) : d
+
+
+Remove anonymous users? [Y/n] Y 
+Disallow root login remotely? [Y/n] Y 
+Remove test database and access to it? [Y/n] Y 
+"
