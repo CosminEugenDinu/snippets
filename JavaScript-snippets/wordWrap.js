@@ -1,6 +1,6 @@
 
 function wordWrap(str, lineLen) {
-  const wordRe = /\S+/g;
+  const wordRe = /[\S\n]+/g;
   const newStr = [];
   let wordMatch = wordRe.exec(str);
   let row = 1;
