@@ -15,3 +15,16 @@ function wordWrap(str, lineLen) {
   }
   return newStr.join(' ');
 }
+
+
+function wordWrap(str, lineLen) {
+	let chars = 0;
+	return str.match(/[\S\n]+/g).map(word => {
+		chars += word.length + 1;
+		if (chars > lineLen) {
+			chars = 0;
+			return '\n' + word;
+		}
+		return word 
+	}).join(' ');
+}
