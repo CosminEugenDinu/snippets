@@ -45,6 +45,7 @@ function wordWrap(str, lineLen) {
     }
     charCount++
   }
+  formated.push(str.slice(lastInserted_i);
   // for (let row of formated) console.log(row.length)
   return formated.join`\n`;
 }
