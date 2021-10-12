@@ -51,3 +51,18 @@ function wordWrap(str, lineLen) {
 }
 
 
+function wordWrap(str, lineLen=80) {
+  const words = str.split(' ');
+  const newStrArr = [];
+  let rowCharCount = 0;
+  for (let word of words) {
+    if (rowCharCount+word.length > lineLen - word.length) {
+      newStrArr.push('\n' + word)
+      rowCharCount = 0;
+    } else {
+      newStrArr.push(word + ' ');
+      rowCharCount += word.length + 1;
+    }
+  }
+  return newStrArr.join``;
+}
