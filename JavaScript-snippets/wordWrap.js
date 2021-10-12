@@ -28,3 +28,25 @@ function wordWrap(str, lineLen) {
 		return word 
 	}).join(' ');
 }
+
+
+function wordWrap(str, lineLen) {
+  const formated = [];
+  let lastInserted_i = 0,
+    lastSpace_i = 0,
+    charCount = 0,
+    rowCharCount= 0;
+  for (let char of str) {
+    if (char === " ") lastSpace_i = charCount;
+    if (rowCharCount++ > lineLen) {
+      formated.push(str.slice(lastInserted_i, lastSpace_i));
+      lastInserted_i = lastSpace_i;
+      rowCharCount = 0;
+    }
+    charCount++
+  }
+  // for (let row of formated) console.log(row.length)
+  return formated.join`\n`;
+}
+
+
