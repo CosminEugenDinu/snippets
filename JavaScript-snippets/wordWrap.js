@@ -51,18 +51,24 @@ function wordWrap(str, lineLen) {
 }
 
 
-function wordWrap(str, lineLen=80) {
-  const words = str.split(' ');
+function wordWrap(str, lineLen=70) {
   const newStrArr = [];
+  const words = str.split(' ');
   let rowCharCount = 0;
-  for (let word of words) {
-    if (rowCharCount+word.length > lineLen - word.length) {
-      newStrArr.push('\n' + word)
+  for (const word of words) {
+    const w = word.replace('\n', '');
+    if (w.length < word.length && rowCharCount < lineLen) {
+      rowCharCount = 0;
+    }
+    if (rowCharCount + w.length > lineLen) {
+      newStrArr.push('\n');
       rowCharCount = 0;
     } else {
       newStrArr.push(word + ' ');
       rowCharCount += word.length + 1;
     }
-  }
+  } 
   return newStrArr.join``;
 }
+
+
