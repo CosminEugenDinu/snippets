@@ -72,31 +72,34 @@ function wordWrap(str, lineLen=70) {
 }
 
 
-function wordWrap(str, lineLen=30) {
+function wordWrap(str, lineLen=10) {
   const newStrArr = [];
   const lines = str.split('\n');
   for (const line of lines) {
     if (line.length <= lineLen) {
       newStrArr.push(line);
     } else {
-      const words = line.split(/[ \t]/);
+      const words = line.split(' ');
       const newLineArr = [];
       let rowCharsCount = 0;
-
-      words.forEach(w => {
-        rowCharsCount += `${w} `.length;
-        if (rowCharsCount <= lineLen) {
+      words.forEach((w, i) => {
+        const currWordLen = `${w} `.length;
+        if (rowCharsCount + currWordLen < lineLen) {
           newLineArr.push(w);
+          rowCharsCount += currWordLen; 
+          if (i + 1 === words.length) {
+            newStrArr.push(newLineArr.join` `);
+          }
         } else {
-          newStrArr.push(newLineArr.join` `);
+          const newLine = newLineArr.join` `;
+          newStrArr.push(newLine);
           newLineArr.length = 0;
-          rowCharsCount = 0;
+          rowCharsCount = (w + ' ').length;
+          newLineArr.push(w);
         }
       });
     }
   }
   return newStrArr.join`\n`;
 }
-
-
 
