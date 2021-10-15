@@ -1,3 +1,13 @@
+## Install MySql 8.18 on WSL2 Ubuntu20.04
+
+```bash
+(
+git clone https://gist.github.com/CosminEugenDinu/ad8acdb311b81e5eb7113497cc43b8b1 install_mysql8.18
+chmod 740 install_mysql8.18/wsl2-ubuntu20.04-mysql8.18.sh
+./install_mysql8.18/wsl2-ubuntu20.04-mysql8.18.sh
+)
+```
+
 ## Install MySql 8.x on WSL2 Ubuntu18.04
 
 ```bash
@@ -7,6 +17,8 @@ chmod 740 install_mysql8/wsl2-ubuntu18.04-mysql8.0.sh
 ./install_mysql8/wsl2-ubuntu18.04-mysql8.0.sh
 )
 ```
+
+
 
 Enter MySql console in order to setup database, users, etc.:
 ```bash
