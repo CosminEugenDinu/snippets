@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+_gpg2pdf() {
+  # get password user input
+  local pass
+  read -rsp "Password:" pass
+  decrypted="$(gpg --batch --yes --passphrase "${pass}" -d "$1")"
+  # if previous command succeded
+  if (( $? == 0 ));then
+    # utilizing /dev/shm in-memory file storage
+    mem_file="$(mktemp -p /dev/shm)"
+    enscript -o- <<< "${decrypted}" | ps2pdf - > "${mem_file}"
+    qpdf --encrypt "${pass}" "${pass}" 256 \
+    --cleartext-metadata \
+    --print=none \
+    --modify=none \
+    --extract=n \
+    --modify-other=n -- \
+    "${mem_file}" "${1%.*}.pdf" 
+  fi
+
+  # restart agent in order to lose kept password
+  gpgconf --kill gpg-agent
+  unset pass
+}
+
+
+if (( $# == 0 )); then
+  echo "Use is like: ./gpg2pdf <file.gpg>"
+else
+  ext="${1#*.}"
+  if [[ "${ext}" != "gpg" ]];then
+    echo "File must be of type '*.gpg'."
+    exit 2
+  fi
+  _gpg2pdf "$1"
+fi
