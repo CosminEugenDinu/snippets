@@ -2,26 +2,34 @@
 
 _gpg2pdf() {
   # get password user input
-  local pass
-  read -rsp "Password:" pass
-  decrypted="$(gpg --batch --yes --passphrase "${pass}" -d "$1")"
+  local user_pass
+  local owner_pass 
+  read -rsp "Password:" user_pass
+  echo 
+  # If these remains the same then pdf can be modified after open (evan open password can be removed).
+  owner_pass="${user_pass}"
+
+  decrypted="$(gpg --batch --yes --passphrase "${user_pass}" -d "$1")"
   # if previous command succeded
   if (( $? == 0 ));then
     # utilizing /dev/shm in-memory file storage
     mem_file="$(mktemp -p /dev/shm)"
     enscript -o- <<< "${decrypted}" | ps2pdf - > "${mem_file}"
-    qpdf --encrypt "${pass}" "${pass}" 256 \
-    --cleartext-metadata \
-    --print=none \
-    --modify=none \
-    --extract=n \
-    --modify-other=n -- \
-    "${mem_file}" "${1%.*}.pdf" 
+
+    read -rsp "Provide Owner Password (leaving blank allows pdf modification):" owner_pass
+    echo
+    qpdf --encrypt "${user_pass}" "${owner_pass}" 256 \
+      --print=none \
+      --modify=none \
+      --\
+      "${mem_file}" "${1%.*}.pdf" \
+      && echo "Created file '${1%.*}.pdf'"
   fi
 
   # restart agent in order to lose kept password
   gpgconf --kill gpg-agent
-  unset pass
+  unset user_pass
+  unset owner_pass
 }
 
 
