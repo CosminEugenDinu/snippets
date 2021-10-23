@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+#####################################################
+
+# if no arguments, read from stdin, otherwise arg1
+
+if (( $# == 0 )); then
+  stdin="$(cat)"
+  if [[ -n "${stdin}" ]];then
+    enscript -o- <<< "${stdin}" | ps2pdf -
+  fi
+else
+  enscript "$1" -o- | ps2pdf - > "${1%.*}.pdf"
+fi
+
