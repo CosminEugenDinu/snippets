@@ -36,7 +36,7 @@ _gpg2pdf() {
 if (( $# == 0 )); then
   echo "Use is like: ./gpg2pdf <file.gpg>"
 else
-  ext="${1#*.}"
+  ext="${1##*.}"
   if [[ "${ext}" != "gpg" ]];then
     echo "File must be of type '*.gpg'."
     exit 2
