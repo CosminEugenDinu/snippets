@@ -14,7 +14,7 @@ _gpg2pdf() {
   if (( $? == 0 ));then
     # utilizing /dev/shm in-memory file storage
     mem_file="$(mktemp -p /dev/shm)"
-    enscript -o- <<< "${decrypted}" | ps2pdf - > "${mem_file}"
+    enscript -M A5 -o- <<< "${decrypted}" | ps2pdf - > "${mem_file}"
 
     read -rsp "Provide Owner Password (leaving blank allows pdf modification):" owner_pass
     echo
