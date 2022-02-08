@@ -12,7 +12,21 @@ function partition(A, refVal=0) {
   }
   return i + 1;
 }
+// const p = partition(arr);
+// console.log(p, arr)
 
-const p = partition(arr);
+//move all zeros to front and keep the order of elements
 
-console.log(p, arr)
+function moveOrder(A, refVal=0) {
+  const temp = Array(A.length).fill(refVal);
+  let i = A.length, j = i;
+  while (--i >= 0) {
+    if (A[i] !== refVal) {
+      temp[--j] = A[i]
+    }
+  }  
+  console.log(temp)
+}
+
+console.log(arr)
+moveOrder(arr);
