@@ -1,6 +1,6 @@
 // counts the number of calls in a call stack (for async applications)
 function getNthCall() {
-  thisFunc = getNthCall;
+  const thisFunc = getNthCall;
   thisFunc.callCount = thisFunc?.callCount + 1 || 1;
   thisFunc.reseterLaunched = true;
   (async () => {})().then(() => {
