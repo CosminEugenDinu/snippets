@@ -1,0 +1,5 @@
+#!/bin/bash
+
+filename=$1
+gpg -d "${filename}" | tar zxfk -
+

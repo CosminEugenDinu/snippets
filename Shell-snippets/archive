@@ -1,0 +1,5 @@
+#/bin/bash
+filename=$1
+mem_file="$(mktemp -p /dev/shm)"
+tar -czf "${mem_file}" "${filename}"
+gpg -o "${filename}.tar.gpg" --symmetric "${mem_file}"
