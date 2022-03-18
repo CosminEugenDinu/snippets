@@ -26,4 +26,4 @@ conn system/<your db pass from ORACLE_PWD>@localhost:1521/xepdb1;
 # create user
 create user <your user name> identified by <your user pass>;
 # grant permissions
-grant connect, resource, dba to <your user name>;
+grant connect, resource, dba, create session to <your user name>;
