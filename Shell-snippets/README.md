@@ -13,7 +13,7 @@ Both servers (`laptop` and `target`) must be able to connect `vps-on-line` via s
 ssh -R 48001:localhost:22 vps_user@vps-on-line -o ServerAliveInterval=60
 ```
 ***Note 1:***
-*In order to run above command and leave terminal you might want to run it in [screen](https://www.gnu.org/software/screen/manual/screen.html#Invoking-Screen) (terminal multiplexor), like `screen yourcommand` then `Ctrl+a`, then `Ctrl+d`, then `exit` or append *** &*** to command and `you are free`.*
+*In order to run above command and leave terminal you might want to run it in [screen](https://www.gnu.org/software/screen/manual/screen.html#Invoking-Screen) (terminal multiplexor), like `screen yourcommand` then `Ctrl+a`, then `Ctrl+d`, then `exit` or append ***&*** to command and `you are free`.*
 
 ***Note 2:***
 *`-o ServerAliveInterval=60` instructs the ssh client to send a sign-of-life signal to the server once a minute, to prevent connection loss.*
