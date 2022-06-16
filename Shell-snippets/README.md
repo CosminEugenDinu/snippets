@@ -7,7 +7,7 @@ Servers:
 ## Step 1
 Both servers (`laptop` and `target`) must be able to connect `vps-on-line` via ssh.
 - Somehow reach into `target`'s terminal:
-- Temporary set `PasswordAuthentication yes` from `/etc/ssh/sshd_config` and `sudo service ssh restart`.
+- Temporary set `PasswordAuthentication yes` from `/etc/ssh/sshd_config` and `sudo service ssh restart`. This is required in order to copy your `laptop` ssh public key to `target` `~/.ssh/authorized_keys`.
 - Start a ssh connection to `vps-on-line` with remote forwarding `-R` `remote_socket:host:hostport`
 ```bash
 ssh -R 48001:localhost:22 vps_user@vps-on-line -o ServerAliveInterval=60
@@ -24,7 +24,7 @@ Go to your `laptop`
 ```bash
 screen ssh -L 48002:localhost:48001 vps_user@vps-on-line -o ServerAliveInterval=60
 ```
-- Detach screen terminal: `Ctrl+a`, `Ctrl+d`.
+- Detach screen terminal: `Ctrl+a`, then `Ctrl+d`.
 - Try connectiog to `target`:
 ```bash
 ssh -p 48002 target_user@localhost
@@ -33,7 +33,11 @@ ssh -p 48002 target_user@localhost
 ```bash
 ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 48002 target_user@localhost
 ```
-- On `target` server, don't forget to set `PasswordAuthentication no` and `sudo service ssh restart`.
+- Test ssh connection from `laptop` to `target`
+```bash
+ssh -p 48002 target@localhost
+```
+- On `target` server, don't forget to set `PasswordAuthentication no` from `/etc/ssh/sshd_config` and `sudo service ssh restart`.
 
 ## Use rsync over ssh tunnel
 ```bash
