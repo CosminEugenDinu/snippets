@@ -22,9 +22,9 @@ ssh -R 48001:localhost:22 vps_user@vps-on-line -o ServerAliveInterval=60
 Go to your `laptop`
 - Open ssh connection to `vps-on-line` with local port forwarding:
 ```bash
-screen ssh -L 48002:localhost:48001 vps_user@vps-on-line -o ServerAliveInterval=60
+ssh -L 48002:localhost:48001 vps_user@vps-on-line -o ServerAliveInterval=60
 ```
-- Detach screen terminal: `Ctrl+a`, then `Ctrl+d`.
+- Detach screen terminal by appending ***&*** or prepending command with `screen`, then `Ctrl+a`, then `Ctrl+d`.
 - Try connectiog to `target`:
 ```bash
 ssh -p 48002 target_user@localhost
