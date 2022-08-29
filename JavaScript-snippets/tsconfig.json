@@ -1,0 +1,16 @@
+{
+  "include": ["./"],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "ES6",
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "rootDir": "./",
+    "outDir": "./dist"
+  }
+}
